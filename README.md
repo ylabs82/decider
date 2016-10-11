@@ -3,9 +3,7 @@
 A program written in Rust that will help deciding which file to play from a
 multimedia collection, whether be a movie or music.
 
-I wrote it as a way to learn Rust, and it's explained in [my web] (in spanish).
-
-[my web]: https://www.ylabs.es/article/empezando-con-rust/
+I wrote it as a way to learn Rust, and it's explained in [my web](https://www.ylabs.es/article/empezando-con-rust/) (in spanish).
 
 
 ## Usage
