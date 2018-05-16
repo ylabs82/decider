@@ -86,8 +86,7 @@ fn main() {
                     || entry.as_ref().unwrap().path().extension().unwrap() == "flac"
                     || entry.as_ref().unwrap().path().extension().unwrap() == "mp3"
                     || entry.as_ref().unwrap().path().extension().unwrap() == "wav"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "ogg"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "jpg")
+                    || entry.as_ref().unwrap().path().extension().unwrap() == "ogg")
         })
         .collect();
 
