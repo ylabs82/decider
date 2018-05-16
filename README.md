@@ -3,7 +3,7 @@
 A program written in Rust that will help deciding which file to play from a
 multimedia collection, whether be a movie or music.
 
-I wrote it as a way to learn Rust, and it's explained in [my web](https://www.ylabs.es/article/empezando-con-rust/) (in spanish).
+I wrote it as a way to learn Rust, and version 0.1.0 is explained in [my web](https://www.ylabs.es/article/empezando-con-rust/) (in spanish).
 
 
 ## Usage
@@ -29,7 +29,7 @@ than one file with option **c**, option **p** will be ignored.
 
 * **_decider_** will panic if you try to select something from a directory where
 files has no extensions.
-* When try to show more than one file, sometimes we get duplicate entries.
+* ~~When try to show more than one file, sometimes we get duplicate entries.~~
 * It's not very useful yet if we try to select music.
 * As it uses no recursion, the way we use to store our files will greatly affect
 the results.
