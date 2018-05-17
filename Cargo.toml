@@ -1,8 +1,9 @@
 [package]
 name = "decider"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Yago Mouriño Mendaña <contacto@ylabs.es>"]
 
 [dependencies]
 getopts = "0.2"
-rand = "0.3"
+rand = "0.4"
+walkdir = "2"

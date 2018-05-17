@@ -27,12 +27,12 @@ than one file with option **c**, option **p** will be ignored.
 
 ## Issues **not yet** addressed
 
-* **_decider_** will panic if you try to select something from a directory where
-files has no extensions.
+* ~~**_decider_** will panic if you try to select something from a directory where
+files has no extensions.~~
 * ~~When try to show more than one file, sometimes we get duplicate entries.~~
 * It's not very useful yet if we try to select music.
-* As it uses no recursion, the way we use to store our files will greatly affect
-the results.
+* ~~As it uses no recursion, the way we use to store our files will greatly affect
+the results.~~
 
 ## License
 

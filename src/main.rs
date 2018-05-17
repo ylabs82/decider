@@ -24,12 +24,13 @@
 
 extern crate getopts;
 extern crate rand;
+extern crate walkdir;
 
 use getopts::Options;
 use rand::Rng;
 use std::env;
-use std::fs;
 use std::process::Command;
+use walkdir::WalkDir;
 
 fn usage(opts: Options) {
     // Get the current executable name, without the path.
@@ -68,27 +69,21 @@ fn main() {
     let directory = parsed.opt_str("i");
     let directory = directory.as_ref().map(String::as_ref).unwrap_or(".");
 
-    // Get the contents of that directory...
-    let paths = fs::read_dir(directory).expect("ERROR: can't read directory.");
+    // Get the contents of that directory and get only multimedia files.
+    let mut entries = vec![];
+    let extensions = vec![
+        "avi", "flac", "flv", "mkv", "mov", "mp3", "mp4", "mpeg", "mpg", "ogg", "wav", "wmv"
+    ];
 
-    // ...and filter them to get only multimedia files.
-    let mut entries: Vec<_> = paths
-        .filter(|entry| {
-            entry.as_ref().unwrap().path().is_file()
-                && (entry.as_ref().unwrap().path().extension().unwrap() == "mp4"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "avi"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "mov"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "mkv"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "flv"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "wmv"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "mpg"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "mpeg"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "flac"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "mp3"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "wav"
-                    || entry.as_ref().unwrap().path().extension().unwrap() == "ogg")
-        })
-        .collect();
+    for entry in WalkDir::new(directory) {
+        let entry = entry.unwrap();
+
+        if entry.path().is_file() && entry.path().extension() != None {
+            if extensions.contains(&entry.path().extension().unwrap().to_str().unwrap()) {
+                entries.push(entry);
+            }
+        }
+    }
 
     // How many files are in the collection?
     let entries_count = entries.len();
@@ -103,7 +98,7 @@ fn main() {
         if count == 1 {
             // Get a random file.
             let selected = rand::thread_rng().gen_range(0, entries_count);
-            let selected = entries[selected].as_ref().unwrap().path();
+            let selected = entries[selected].path();
 
             // Should we play it?
             if parsed.opt_present("p") {
@@ -118,8 +113,7 @@ fn main() {
         } else if count > 1 && count < 6 {
             for i in 0..count {
                 let selected = rand::thread_rng().gen_range(0, entries_count - i as usize);
-                let selected = entries.remove(selected).unwrap().path();
-                println!("{}", selected.display());
+                println!("{}", entries.remove(selected).path().display())
             }
         } else {
             println!("ERROR: 5 files max.");
