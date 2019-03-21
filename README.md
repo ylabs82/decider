@@ -1,4 +1,5 @@
 # DECIDER
+[![Build Status](https://travis-ci.org/ylabs82/decider.svg?branch=master)](https://travis-ci.org/ylabs82/decider)
 
 A program written in Rust that will help deciding which file to play from a
 multimedia collection, whether be a movie or music.
